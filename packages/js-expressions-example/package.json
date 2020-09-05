@@ -1,0 +1,66 @@
+{
+  "name": "@ria-develop/js-expressions-example",
+  "version": "0.0.0",
+  "description": "A module that uses @ria-develop/js-expressions-client to illustrate how replacer works",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ria-develop/js-libs.git",
+    "directory": "packages/js-expression-example"
+  },
+  "keywords": [
+    "data",
+    "expressions",
+    "evaluator",
+    "evaluate",
+    "convert",
+    "tokens",
+    "replacer",
+    "replace"
+  ],
+  "author": "Michał Grzegorzewski <npm@ria-develop.pl>",
+  "homepage": "https://ria-develop/js-data-expressions",
+  "license": "ISC",
+  "main": "index.js",
+  "esnext": "src/js-expressions-example.ts",
+  "types": "types/js-expressions-example.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "peerDependencies": {
+  },
+  "files": [
+    "dist",
+    "public",
+    "types",
+    "index.js"
+  ],
+  "dependencies": {
+    "@ria-develop/js-expressions-core": "^0.0.0",
+    "@ria-develop/js-expressions-client": "^0.0.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@ria-develop/webpack-config": "*"
+  },
+  "publishConfig": {
+    "access": "public",
+    "target": "web"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist",
+      "<rootDir>/types"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "test": "jest --coverage",
+    "prebuild": "rm -R -f types dist public/js",
+    "postbuild": "./bin/cpy.sh"
+  }
+}

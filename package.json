@@ -1,0 +1,52 @@
+{
+  "name": "@ria-develop/js-libs",
+  "version": "0.0.1",
+  "description": "A root module for js-libs",
+  "private": true,
+  "scripts": {
+    "test": "lerna run test",
+    "build": "webpack",
+    "postbuild": "lerna run postbuild",
+    "prebuild": "lerna run prebuild"
+  },
+  "keywords": [],
+  "author": "Michał Grzegorzewski <npm@ria-develop.pl> (https://ria-develop.pl)",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^16.13.1",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@lerna/project": "^3.21.0",
+    "@lerna/package": "^3.16.0",
+    "@lerna/package-graph": "^3.18.5",
+    "@lerna/filter-options": "^3.20.0",
+    "@lerna/query-graph": "^3.18.5",
+    "@ria-develop/eslint-config": "0.0.0",
+    "@ria-develop/webpack-config": "0.0.0",
+    "@types/jest": "^26.0.13",
+    "@types/node": "12",
+    "babel-jest": "^26.3.0",
+    "eslint": "^7.8.1",
+    "jest": "^26.4.2",
+    "lerna": "^3.22.1",
+    "prettier": "^2.1.1",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "workspaces": [
+    "config/*",
+    "packages/*"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@ria-develop"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowUmdGlobalAccess": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
+    "jsx": "preserve",
+    "target": "ES5",
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "removeComments": false,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "test-data": [
+        "./packages/js-expressions-client/__mocks__/test-data.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
