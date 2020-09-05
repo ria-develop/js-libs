@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/js-expressions-core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A core module that executes the expression",
   "repository": {
     "type": "git",
