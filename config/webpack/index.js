@@ -18,10 +18,7 @@ const packages = toposort(getPackagesSync()).reduce((previous, current) => {
 }, []);
 
 const babelOptions = {
-  'presets': [
-    '@babel/preset-env',
-    '@babel/preset-typescript'
-  ]
+  presets: ['@babel/preset-env', '@babel/preset-typescript']
 };
 
 module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', plugins = []}) => {
@@ -36,7 +33,7 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
 
   const library = libraryScope ? [libraryScope, nameToken] : nameToken;
   const destination = libraryTarget === 'commonjs' ? 'cjs' : 'dist';
-  const min = mode === 'production' && '.min' || '';
+  const min = (mode === 'production' && '.min') || '';
   const externals = externalizer(packages);
   return {
     entry,
@@ -70,7 +67,8 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
               options: {
                 transpileOnly: true
               }
-            }]
+            }
+          ]
         }
       ]
     },
@@ -82,10 +80,7 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
         })
       ]
     },
-    plugins: [
-      new ForkTsCheckerWebpackPlugin(),
-      ...plugins
-    ],
+    plugins: [new ForkTsCheckerWebpackPlugin(), ...plugins],
     optimization: {
       chunkIds: 'named',
       splitChunks: {

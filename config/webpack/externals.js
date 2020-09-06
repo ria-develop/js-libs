@@ -14,7 +14,8 @@ module.exports = (packages) => ({
   ...packages.reduce((reduced, currentValue) => {
     const {name, private: exclude} = currentValue;
     return {
-      ...reduced, ...(!exclude && {
+      ...reduced,
+      ...(!exclude && {
         [name]: {
           commonjs: name,
           commonjs2: name,

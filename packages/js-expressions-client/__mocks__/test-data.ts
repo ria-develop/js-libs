@@ -26,7 +26,7 @@ export const input = {
   }
 };
 
-type InputData = { user; products; options };
+type InputData = {user; products; options};
 
 const findCompleted = (items) => items.filter((basket) => !basket.some((product) => !product.selected));
 
@@ -47,18 +47,21 @@ const orders = (data: InputData): [] | undefined => getIfCompleted(findCompleted
 
 const user = '{user.firstName} {user.lastName}';
 
-const data = [{
-  user,
-  orders
-}, {
-  locations
-}]
+const data = [
+  {
+    user,
+    orders
+  },
+  {
+    locations
+  }
+];
 
 const request = {
   delivery,
   data
-}
+};
 
 export const outputShape = {
   request
-}
+};

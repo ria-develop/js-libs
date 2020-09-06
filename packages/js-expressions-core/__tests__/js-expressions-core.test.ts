@@ -4,17 +4,22 @@ const TestToken = 'MyTestToken';
 const TestValue = 'MyTestValue';
 
 type MyData = {
-  [TestToken]: string
-}
+  [TestToken]: string;
+};
 
 const input: MyData = {[TestToken]: TestValue};
 
 const TargetKey = 'targetKey';
 
 describe('@ria-develop/js-expressions-core', () => {
-
   it(`should evaluate nothing and return given ${TestValue}`, function () {
-    expect(evaluator({}, () => '', () => '')(TargetKey, TestValue)).toEqual(TestValue);
+    expect(
+      evaluator(
+        {},
+        () => '',
+        () => ''
+      )(TargetKey, TestValue)
+    ).toEqual(TestValue);
   });
 
   it(`should evaluate ${TestToken} and return ${TestValue} from given input data`, function () {

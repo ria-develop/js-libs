@@ -22,22 +22,15 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:import/errors',
-    'plugin:import/warnings'
+    'plugin:import/warnings',
+    'plugin:prettier/recommended'
   ],
   rules: {
+    'prettier/prettier': ['error', {singleQuote: true, printWidth: 120, trailingComma: 'none', bracketSpacing: false}],
     'no-console': 'off',
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    'comma-dangle': [
-      'error',
-      'never'
-    ]
+    quotes: ['error', 'single'],
+    'linebreak-style': ['error', 'unix'],
+    'comma-dangle': ['error', 'never']
   },
   overrides: [
     {
@@ -51,10 +44,7 @@ module.exports = {
         },
         warnOnUnsupportedTypeScriptVersion: true
       },
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'plugin:import/typescript'
-      ],
+      extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
       rules: {
         '@typescript-eslint/consistent-type-assertions': 'warn',
         '@typescript-eslint/no-array-constructor': 'warn'

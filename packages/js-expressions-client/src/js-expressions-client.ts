@@ -31,7 +31,7 @@ export const tokenExtractor = (token: string): string => token.replace(/[{}]/g, 
  * Default TokenResolver implementations which uses {#tokenExtractor}
  * @param data
  * @param token
- * @returns {any}
+ * @returns {*}
  */
 export const tokenResolver: TokenResolver = (data, token) => _.get(data, tokenExtractor(token));
 

@@ -1,6 +1,6 @@
-export type TokenProvider = () => string | RegExp  ;
-export type TokenResolver = <T>(inputData: T, token: string) => string ;
-export type Processor = (key: string, value: ValueType) => ValueType
+export type TokenProvider = () => string | RegExp;
+export type TokenResolver = <T>(inputData: T, token: string) => string;
+export type Processor = (key: string, value: ValueType) => ValueType;
 export type ValueType = string | Handler;
 export type Handler = <T>(T) => string;
 /**
@@ -11,20 +11,20 @@ export type Handler = <T>(T) => string;
  * @return {function(*, *=): *}
  * @template T
  */
-const evaluator = <T>(inputData: T, tokenProvider: TokenProvider, tokenResolver: TokenResolver): Processor =>
-  (key: string, value: ValueType): ValueType => {
-    if (typeof value === 'function') {
-      value = value<T>(inputData);
+const evaluator = <T>(inputData: T, tokenProvider: TokenProvider, tokenResolver: TokenResolver): Processor => (
+  key: string,
+  value: ValueType
+): ValueType => {
+  if (typeof value === 'function') {
+    value = value<T>(inputData);
+  }
+  if (typeof value === 'string') {
+    const result = (tokenProvider && value.match(tokenProvider())) || [];
+    if (result.length) {
+      result.forEach((matched) => (value = (value as string).replace(matched, tokenResolver(inputData, matched))));
     }
-    if (typeof value === 'string') {
-      const result = (tokenProvider && value.match(tokenProvider())) || [];
-      if (result.length) {
-        result.forEach((matched) =>
-          value = (value as string).replace(matched, tokenResolver(inputData, matched))
-        );
-      }
-    }
-    return value;
-  };
+  }
+  return value;
+};
 
 export default evaluator;
