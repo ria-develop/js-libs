@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "private": false,
+  "license": "MIT",
   "peerDependencies": {
     "webpack": "^4.44.1"
   },
