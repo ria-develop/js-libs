@@ -87,8 +87,8 @@ out
 dist
 
 # webpack/tsc build / generate output
-umd/
-cjs/
+dist/
+public/js/
 
 # Gatsby files
 .cache/
