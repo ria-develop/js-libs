@@ -38,7 +38,8 @@
   },
   "publishConfig": {
     "access": "public",
-    "target": "web"
+    "target": "web",
+    "registry": "https://npm.pkg.github.com/"
   },
   "jest": {
     "modulePathIgnorePatterns": [
