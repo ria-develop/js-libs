@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given {"user":{"id":"uid1","firstName":"John","lastName":"Doe","address":"st. Middle Of Nowhere 4"},"products":[[{"name":"Product 1","selected":true}],[{"name":"Product 2","userComment":"Need to be reviewed","selected":false}]],"options":{"selectedLocations":["Location1","Location3"],"deliveryDate":"2021-02-01T23:00:00.000Z"}} should match snapshot 1`] = `"{\\"request\\":{\\"delivery\\":\\"2021-02-01T23:00:00.000Z\\",\\"data\\":[{\\"user\\":\\"John Doe\\"},{\\"locations\\":[\\"Location1\\",\\"Location3\\"]}]}}"`;

@@ -41,19 +41,7 @@
     "target": "web",
     "registry": "https://npm.pkg.github.com/"
   },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "<rootDir>/dist",
-      "<rootDir>/types"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.ts?(x)"
-    ],
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
   "scripts": {
-    "test": "jest --coverage ",
     "prebuild": "rm -R -f types dist",
     "postbuild": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir ./types --skipLibCheck"
   }

@@ -1,13 +1,13 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "src": [
-        "./src"
+        "./"
       ],
       "test-data": [
-        "../js-expressions-client/__mocks__/test-data.ts"
+        "../../js-expressions-client/__mocks__/test-data.ts"
       ]
     }
   }

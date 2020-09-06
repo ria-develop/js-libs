@@ -55,6 +55,17 @@
       "@babel/preset-env"
     ]
   },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>packages/*/dist",
+      "<rootDir>packages/*/types"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
+  },
   "eslintConfig": {
     "extends": [
       "@ria-develop"
