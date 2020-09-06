@@ -9,9 +9,19 @@
     "postbuild": "lerna run postbuild",
     "prebuild": "lerna run prebuild"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ]
+  },
   "keywords": [],
   "author": "Michał Grzegorzewski <npm@ria-develop.pl> (https://ria-develop.pl)",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "react": "^16.13.1",
     "@babel/core": "^7.11.6",
@@ -26,6 +36,7 @@
     "@types/jest": "^26.0.13",
     "@types/node": "12",
     "babel-jest": "^26.3.0",
+    "husky": "^4.2.5",
     "eslint": "^7.8.1",
     "jest": "^26.4.2",
     "lerna": "^3.22.1",
