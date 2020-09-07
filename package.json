@@ -56,6 +56,11 @@
     ]
   },
   "jest": {
+    "moduleNameMapper": {
+      "@ria-develop(.*)": [
+        "<rootDir>/packages$1/src/$1"
+      ]
+    },
     "modulePathIgnorePatterns": [
       "<rootDir>packages/*/dist",
       "<rootDir>packages/*/types"
