@@ -10,7 +10,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.0.1",
@@ -30,5 +30,5 @@
     "prettier": "^2.1.1",
     "prettier-eslint": "^11.0.0"
   },
-  "gitHead": "fcce89814a777b594064efeb98463104adc15e1a"
+  "gitHead": "5aad4a21fdeaa16be5d6402836403dbb889f29b4"
 }

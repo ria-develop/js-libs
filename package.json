@@ -78,8 +78,5 @@
     "extends": [
       "@ria-develop"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   }
 }
