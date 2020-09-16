@@ -36,6 +36,16 @@ module.exports = {
     {
       files: ['**/*.ts?(x)'],
       parser: '@typescript-eslint/parser',
+      settings: {
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx']
+        },
+        'import/resolver': {
+          typescript: {
+            project: './tsconfig.json'
+          }
+        }
+      },
       parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',

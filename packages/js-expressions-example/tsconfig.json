@@ -10,5 +10,8 @@
         "../../js-expressions-client/__mocks__/test-data.ts"
       ]
     }
-  }
+  },
+  "include": [
+    "./src"
+  ]
 }
