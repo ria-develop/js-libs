@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/eslint-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "private": false,
   "peerDependencies": {
@@ -15,11 +15,11 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
-    "eslint-import-resolver-typescript": "^2.3.0",
     "babel-eslint": "^10.1.0",
     "confusing-browser-globals": "^1.0.9",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",

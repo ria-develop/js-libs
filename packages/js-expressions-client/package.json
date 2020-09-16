@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/js-expressions-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A module that uses @ria-develop/js-expressions-core to expose default implementation of replacer",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "index.js"
   ],
   "dependencies": {
-    "@ria-develop/js-expressions-core": "^0.0.1",
+    "@ria-develop/js-expressions-core": "^0.0.2",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
