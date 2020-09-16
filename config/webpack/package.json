@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/webpack-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "private": false,
   "license": "MIT",
@@ -22,5 +22,6 @@
     "ts-loader": "^8.0.3",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "webpack-cli": "^3.3.12"
-  }
+  },
+  "gitHead": "a83edbac41e72a7e7984819591e42afb043549b6"
 }

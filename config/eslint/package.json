@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/eslint-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "private": false,
   "peerDependencies": {
@@ -29,5 +29,6 @@
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
     "prettier-eslint": "^11.0.0"
-  }
+  },
+  "gitHead": "a83edbac41e72a7e7984819591e42afb043549b6"
 }
