@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/js-expressions-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A core module that executes the expression",
   "repository": {
     "type": "git",
@@ -45,5 +45,5 @@
     "prebuild": "rm -R -f types dist",
     "postbuild": "tsc -p tsconfig.json --emitDeclarationOnly --declaration --declarationDir ./types --skipLibCheck"
   },
-  "gitHead": "a83edbac41e72a7e7984819591e42afb043549b6"
+  "gitHead": "fcce89814a777b594064efeb98463104adc15e1a"
 }
