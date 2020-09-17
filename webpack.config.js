@@ -1,5 +1,6 @@
 const config = require('@ria-develop/webpack-config');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+const externalized = require('@ria-develop/webpack-config/lerna').getExternals();
 
 const vendors = new HtmlWebpackExternalsPlugin({
   externals: [
@@ -11,13 +12,31 @@ const vendors = new HtmlWebpackExternalsPlugin({
   ]
 });
 
+const externals = {
+  lodash: {
+    commonjs: 'lodash',
+    commonjs2: 'lodash',
+    amd: 'lodash',
+    root: '_'
+  },
+  'lodash/get': {
+    commonjs: 'lodash/get',
+    commonjs2: 'lodash/get',
+    amd: 'lodash/get',
+    root: ['_', 'get']
+  },
+  ...externalized
+};
+
 module.exports = [
   {
     mode: 'production',
-    plugins: [vendors]
+    plugins: [vendors],
+    externals
   },
   {
     mode: 'development',
-    plugins: [vendors]
+    plugins: [vendors],
+    externals
   }
 ].map(config);

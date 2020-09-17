@@ -1,27 +1,16 @@
 const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const path = require('path');
-const externalizer = require('./externals');
+const packages = require('./lerna').getPackages();
 
 const context = process.cwd();
 const nameToken = '[name]';
 
-const {getPackagesSync} = require('@lerna/project');
-const {toposort} = require('@lerna/query-graph');
-
-const packages = toposort(getPackagesSync()).reduce((previous, current) => {
-  const publishConfig = current.get('publishConfig');
-  if (publishConfig && publishConfig.target === 'web') {
-    return previous.concat([current]);
-  }
-  return previous;
-}, []);
-
 const babelOptions = {
-  presets: ['@babel/preset-env', '@babel/preset-typescript']
+  presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
 };
 
-module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', plugins = []}) => {
+module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', plugins = [], externals = []}) => {
   let libraryScope;
   const entry = packages.reduce((previous, current) => {
     const [scope, name] = current.name.split('/');
@@ -34,41 +23,59 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
   const library = libraryScope ? [libraryScope, nameToken] : nameToken;
   const destination = libraryTarget === 'commonjs' ? 'cjs' : 'dist';
   const min = (mode === 'production' && '.min') || '';
-  const externals = externalizer(packages);
+  const sourceMap = mode === 'production';
+  const cssLoader = {
+    loader: 'css-loader',
+    options: {
+      sourceMap
+    }
+  };
+  const lessLoader = {
+    loader: 'less-loader',
+    options: {
+      sourceMap
+    }
+  };
+  const styleLoader = {loader: 'style-loader'};
+  const babelLoader = {
+    loader: 'babel-loader',
+    options: babelOptions
+  };
+  const tsLoader = {
+    loader: 'ts-loader',
+    options: {transpileOnly: true}
+  };
   return {
     entry,
     output: {
       libraryTarget,
       library,
       umdNamedDefine: true,
-      filename: `./[name]/${destination}/[name]${min}.js`,
-      path: path.resolve(context, 'packages')
+      filename: `./packages/[name]/${destination}/[name]${min}.js`,
+      path: path.resolve(context)
     },
     name: `${mode}:${libraryTarget}`,
     context,
     mode,
-    devtool: mode === 'production' ? 'none' : 'inline-source-map',
+    devtool: sourceMap ? 'none' : 'inline-source-map',
     externals,
+    devServer: {
+      hot: true
+    },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
-          include: [
-            //TODO: get it from effective tsconfig.json like: tsc --printConfig
-            path.resolve(context, 'packages/js-expressions-client/__mocks__/test-data.ts')
-          ].concat(packages.map((pkg) => path.resolve(pkg.location, 'src'))),
-          use: [
-            {
-              loader: 'babel-loader',
-              options: babelOptions
-            },
-            {
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true
-              }
-            }
-          ]
+          exclude: /node_modules/,
+          use: [babelLoader, tsLoader]
+        },
+        {
+          test: /\.less$/,
+          use: [styleLoader, cssLoader, lessLoader]
+        },
+        {
+          test: /\.css$/,
+          use: [styleLoader, cssLoader]
         }
       ]
     },
@@ -80,25 +87,37 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
         })
       ]
     },
-    plugins: [new ForkTsCheckerWebpackPlugin(), ...plugins],
+    plugins: [
+      new ForkTsCheckerWebpackPlugin({
+        eslint: {
+          enabled: true,
+          files: './packages/**/src/*.{ts,tsx,js,jsx}',
+          options: {
+            fix: true
+          }
+        }
+      }),
+      ...plugins
+    ],
     optimization: {
-      chunkIds: 'named',
+      runtimeChunk: 'single',
       splitChunks: {
+        chunks: 'all',
         cacheGroups: {
-          commons: {
+          shared: {
+            name: 'shared',
             chunks: 'initial',
             minChunks: 2,
-            maxInitialRequests: 5, // The default limit is too small to showcase the effect
-            minSize: 0, // This is example is too small to create commons chunks
-            filename: `./js-expressions-common/dist/js-expressions-common${min}.js`
+            enforce: true
           },
           vendor: {
-            test: /node_modules/,
-            chunks: 'initial',
-            name: 'vendor',
-            priority: 10,
-            enforce: true,
-            filename: `./js-expressions-vendor/dist/js-expressions-vendor${min}.js`
+            test: /[\\/]node_modules|modules[\\/]/,
+            name(module) {
+              return (
+                'vendor/' + module.context.match(/[\\/](node_modules|modules)[\\/](.*?)([\\/]|$)/)[2].replace('@', '')
+              );
+            },
+            enforce: true
           }
         }
       }
