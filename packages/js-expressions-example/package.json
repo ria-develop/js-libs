@@ -1,6 +1,6 @@
 {
   "name": "@ria-develop/js-expressions-example",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A module that uses @ria-develop/js-expressions-client to illustrate how replacer works",
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "@ria-develop/webpack-config": "^0.0.5"
+    "@ria-develop/webpack-config": "^0.0.6"
   },
   "publishConfig": {
     "access": "public",
