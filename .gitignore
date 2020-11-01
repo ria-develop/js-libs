@@ -121,3 +121,4 @@ public/js/
 .yarn/install-state.gz
 .pnp.*
 
+.idea/

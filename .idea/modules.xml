@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/eslint.iml" filepath="$PROJECT_DIR$/.idea/eslint.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/js-expressions-client.iml" filepath="$PROJECT_DIR$/.idea/js-expressions-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/js-expressions-core.iml" filepath="$PROJECT_DIR$/.idea/js-expressions-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/js-expressions-example.iml" filepath="$PROJECT_DIR$/.idea/js-expressions-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/js-libs.iml" filepath="$PROJECT_DIR$/.idea/js-libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/webpack.iml" filepath="$PROJECT_DIR$/.idea/webpack.iml" />
+    </modules>
+  </component>
+</project>

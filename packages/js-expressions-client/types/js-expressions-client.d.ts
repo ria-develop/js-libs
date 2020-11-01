@@ -1,4 +1,4 @@
-import {Processor, TokenProvider, TokenResolver} from '@ria-develop/js-expressions-core';
+import { Processor, TokenProvider, TokenResolver } from '@ria-develop/js-expressions-core';
 /**
  * Optional token that can be used to resolve value
  * TODO: Implement method for resolving this kind of token

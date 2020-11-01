@@ -1,3 +1,5 @@
+const extensions = ['.js', '.jsx'];
+
 module.exports = {
   root: true,
   env: {
@@ -10,12 +12,28 @@ module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
+    allowImportExportEverywhere: true,
+    ecmaFeatures: {
+      jsx: true
+    }
   },
   settings: {
     react: {
-      version: '16'
-    }
+      version: 'detect',
+      createClass: 'createReactClass',
+      pragma: 'React',
+      jsx: true
+      // fragment: 'React.Fragment'
+    },
+    propWrapperFunctions: ['forbidExtraProps', {property: 'freeze', object: 'Object'}, {property: 'myFavoriteWrapper'}],
+    linkComponents: ['Hyperlink', {name: 'Link', linkAttribute: 'to'}],
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', 'src/', 'node_modules/@types'],
+      },
+    },
   },
   extends: [
     'eslint:recommended',

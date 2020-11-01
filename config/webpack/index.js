@@ -1,25 +1,19 @@
-const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const {TsconfigPathsPlugin, ForkTsCheckerPlugin, MiniCssExtractPlugin} = require('./plugins');
 const path = require('path');
-const packages = require('./lerna').getPackages();
-
+const entry = require('./lerna').getEntries();
 const context = process.cwd();
 const nameToken = '[name]';
 
-const babelOptions = {
-  presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
-};
-
-module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', plugins = [], externals = []}) => {
-  let libraryScope;
-  const entry = packages.reduce((previous, current) => {
-    const [scope, name] = current.name.split('/');
-    libraryScope = scope || libraryScope;
-    const entryName = name || scope;
-    const next = {[entryName]: path.resolve(current.location, 'src', `${entryName}.ts`)};
-    return {...previous, ...next};
-  }, {});
-
+module.exports = ({
+  libraryTarget = 'umd',
+  mode,
+  tsconfigPath = 'tsconfig.json',
+  plugins = [],
+  externals = [],
+  libraryScope,
+  babelLoaderOptions,
+  tsLoaderOptions
+}) => {
   const library = libraryScope ? [libraryScope, nameToken] : nameToken;
   const destination = libraryTarget === 'commonjs' ? 'cjs' : 'dist';
   const min = (mode === 'production' && '.min') || '';
@@ -39,14 +33,18 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
   const styleLoader = {loader: 'style-loader'};
   const babelLoader = {
     loader: 'babel-loader',
-    options: babelOptions
+    options: babelLoaderOptions
   };
   const tsLoader = {
     loader: 'ts-loader',
-    options: {transpileOnly: true}
+    options: tsLoaderOptions
+  };
+  const extractLoader = {
+    loader: MiniCssExtractPlugin.loader
   };
   return {
     entry,
+    cache: true,
     output: {
       libraryTarget,
       library,
@@ -71,16 +69,16 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
         },
         {
           test: /\.less$/,
-          use: [styleLoader, cssLoader, lessLoader]
+          use: [styleLoader, extractLoader, cssLoader, lessLoader]
         },
         {
           test: /\.css$/,
-          use: [styleLoader, cssLoader]
+          use: [styleLoader, extractLoader, cssLoader]
         }
       ]
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.js', '.jsx'],
+      extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.less'],
       plugins: [
         new TsconfigPathsPlugin({
           configFile: path.resolve(context, tsconfigPath)
@@ -88,7 +86,7 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
       ]
     },
     plugins: [
-      new ForkTsCheckerWebpackPlugin({
+      new ForkTsCheckerPlugin({
         eslint: {
           enabled: true,
           files: './packages/**/src/*.{ts,tsx,js,jsx}',
@@ -97,27 +95,24 @@ module.exports = ({libraryTarget = 'umd', mode, tsconfigPath = 'tsconfig.json', 
           }
         }
       }),
+      new MiniCssExtractPlugin({
+        filename: `./packages/[name]/${destination}/[name]${min}.css`
+      }),
       ...plugins
     ],
     optimization: {
       runtimeChunk: 'single',
       splitChunks: {
-        chunks: 'all',
         cacheGroups: {
-          shared: {
-            name: 'shared',
-            chunks: 'initial',
-            minChunks: 2,
-            enforce: true
-          },
-          vendor: {
-            test: /[\\/]node_modules|modules[\\/]/,
+          vendors: {
+            chunks: 'all',
+            test: /[\\/]node_modules[\\/]/,
             name(module) {
-              return (
-                'vendor/' + module.context.match(/[\\/](node_modules|modules)[\\/](.*?)([\\/]|$)/)[2].replace('@', '')
-              );
+              return module.context.match(/[\\/]node_modules[\\/]@?(.*?)([\\/]|$)/)[1];
             },
-            enforce: true
+            filename: `./packages/vendors/[name]/${destination}/[name]${min}.js`,
+            enforce: true,
+            priority: 1
           }
         }
       }
