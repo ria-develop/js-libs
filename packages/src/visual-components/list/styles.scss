@@ -1,0 +1,30 @@
+div[role='rowgroup'] > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: hidden;
+
+  & div[role='gridcell'] {
+    background: none;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: default;
+    position: relative;
+
+    &.is-focused {
+      font-weight: bold;
+    }
+
+    &.is-selected {
+      font-weight: bold;
+    }
+
+    &.is-selected:before {
+    }
+  }
+
+}
+
+.is-highlighted {
+  background-color: lightgray;
+}
