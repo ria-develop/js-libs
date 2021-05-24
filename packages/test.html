@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script type="application/javascript">
+		function MyLeafFunction(numTimes) {
+			let result = 0
+			for (let i = 0; i < numTimes; i++) {
+				result = i;
+			}
+			return result;
+		}
+
+		function MyRootFunction() {
+			console.log(MyLeafFunction(40000000));
+		}
+
+		MyRootFunction();
+  </script>
+</head>
+<body>
+<div>Loaded</div>
+</body>
+</html>
