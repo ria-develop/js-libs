@@ -1,0 +1,16 @@
+@import '~react-virtualized/styles.css';
+
+.is-highlighted {
+  background-color: lightgray;
+}
+.is-selected {
+  background-color: #b8b8b8;
+  outline: 1px solid blue;
+  outline-offset: -1px;
+}
+
+.ReactVirtualized__Table__rowColumn .is-highlighted{
+  background-color: #b8b8b8;
+  outline: 1px solid blue;
+  outline-offset: -1px;
+}
